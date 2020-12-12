@@ -16,12 +16,12 @@ class SG90_92R_Class:
 
         # Adafruit_PCA9685の初期化
         self.mPwm = Adafruit_PCA9685.PCA9685(address=0x41)
-        self.mPwm.set_pwm_freq(60)
+        self.mPwm.set_pwm_freq(50)
 
     """位置セット"""
     def SetPos(self, pos):
-        # pulse = 150～650 : 0 ～ 180deg
-        pulse = (650 - 150) * pos / 180 + 150 + self.m_ZeroOffset
+        # pulse = 110～500 : 0 ～ 180deg
+        pulse = (500 - 110) * pos / 180 + 150 + self.m_ZeroOffset
         self.mPwm.set_pwm(self.mChannel, 0, pulse)
 
     """終了処理"""
@@ -33,7 +33,7 @@ class SG90_92R_Class:
 
 """コントロール例"""
 if __name__ == '__main__':
-    Servo = SG90_92R_Class(Channel=0, ZeroOffset=-10)
+    Servo = SG90_92R_Class(Channel=0, ZeroOffset=0)
     try:
         while True:
             Servo.SetPos(0)
